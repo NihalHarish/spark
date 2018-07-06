@@ -29,9 +29,11 @@ import org.apache.spark.rpc.RpcEndpointAddress
 import org.apache.spark.scheduler.cluster.CoarseGrainedSchedulerBackend
 import org.apache.spark.util.Utils
 
-private[spark] class BasicExecutorFeatureStep(
+import org.apache.spark.internal.Logging
+
+private[spark] class BasicExecutorFeatureStep (
     kubernetesConf: KubernetesConf[KubernetesExecutorSpecificConf])
-  extends KubernetesFeatureConfigStep {
+  extends KubernetesFeatureConfigStep with Logging{
 
   // Consider moving some of these fields to KubernetesConf or KubernetesExecutorSpecificConf
   private val executorExtraClasspath = kubernetesConf.get(EXECUTOR_CLASS_PATH)
@@ -74,6 +76,7 @@ private[spark] class BasicExecutorFeatureStep(
     // hostname must be no longer than 63 characters, so take the last 63 characters of the pod
     // name as the hostname.  This preserves uniqueness since the end of name contains
     // executorId
+    logError("Scheduler Name: " + schedulerName)
     val hostname = name.substring(Math.max(0, name.length - 63))
     val executorMemoryQuantity = new QuantityBuilder(false)
       .withAmount(s"${executorMemoryWithOverhead}Mi")
