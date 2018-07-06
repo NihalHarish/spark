@@ -67,6 +67,7 @@ private[spark] class BasicExecutorFeatureStep(
     }
   private val executorLimitCores = kubernetesConf.get(KUBERNETES_EXECUTOR_LIMIT_CORES)
 
+  private val schedulerName = kubernetesConf.get(KUBERNETES_EXECUTOR_SCHEDULER)
   override def configurePod(pod: SparkPod): SparkPod = {
     val name = s"$executorPodNamePrefix-exec-${kubernetesConf.roleSpecificConf.executorId}"
 
@@ -166,6 +167,7 @@ private[spark] class BasicExecutorFeatureStep(
           .endOwnerReference()
         .endMetadata()
       .editOrNewSpec()
+        .withSchedulerName(schedulerName)
         .withHostname(hostname)
         .withRestartPolicy("Never")
         .withNodeSelector(kubernetesConf.nodeSelector().asJava)

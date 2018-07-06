@@ -140,6 +140,12 @@ private[spark] object Config extends Logging {
         "must be a positive integer")
       .createWithDefault(10)
 
+  val KUBERNETES_EXECUTOR_SCHEDULER =
+    ConfigBuilder("spark.kubernetes.executor.scheduler")
+    .doc("Custom scheduler for executor pods")
+    .stringConf
+    .createWithDefault("default-scheduler")
+
   val WAIT_FOR_APP_COMPLETION =
     ConfigBuilder("spark.kubernetes.submission.waitAppCompletion")
       .doc("In cluster mode, whether to wait for the application to finish before exiting the " +
