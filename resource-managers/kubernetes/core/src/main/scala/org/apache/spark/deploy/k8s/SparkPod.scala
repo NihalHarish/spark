@@ -27,7 +27,6 @@ private[spark] object SparkPod {
         .withNewMetadata()
         .endMetadata()
         .withNewSpec()
-        .withSchedulerName("spot-scheduler")
         .endSpec()
         .build(),
       new ContainerBuilder().build())

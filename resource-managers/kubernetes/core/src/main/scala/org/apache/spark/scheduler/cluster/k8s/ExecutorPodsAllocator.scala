@@ -126,7 +126,6 @@ private[spark] class ExecutorPodsAllocator(
           val executorPod = executorBuilder.buildFromFeatures(executorConf)
           val podWithAttachedContainer = new PodBuilder(executorPod.pod)
             .editOrNewSpec()
-            .withSchedulerName("spot-scheduler")
             .addToContainers(executorPod.container)
             .endSpec()
             .build()
