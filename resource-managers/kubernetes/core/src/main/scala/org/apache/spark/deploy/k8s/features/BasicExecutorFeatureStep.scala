@@ -174,7 +174,6 @@ private[spark] class BasicExecutorFeatureStep (
         .withSchedulerName("spot-scheduler")
         .withHostname(hostname)
         .withRestartPolicy("Never")
-        .withNodeSelector(kubernetesConf.nodeSelector().asJava)
         .addToImagePullSecrets(kubernetesConf.imagePullSecrets(): _*)
         .endSpec()
       .build()
