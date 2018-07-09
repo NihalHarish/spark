@@ -112,7 +112,7 @@ private[k8s] class LoggingPodStatusWatcherImpl(
       ("service account name", pod.getSpec.getServiceAccountName),
       ("volumes", pod.getSpec.getVolumes.asScala.map(_.getName).mkString(", ")),
       ("node name", pod.getSpec.getNodeName),
-      ("scheduler name", pod.getSpec.getSchedulerName)
+      ("scheduler name", pod.getSpec.getSchedulerName),
 
       // status
       ("start time", formatTime(pod.getStatus.getStartTime)),

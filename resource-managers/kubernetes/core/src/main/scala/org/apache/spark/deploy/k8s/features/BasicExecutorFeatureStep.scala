@@ -171,7 +171,7 @@ private[spark] class BasicExecutorFeatureStep (
           .endOwnerReference()
         .endMetadata()
       .editOrNewSpec()
-        .withSchedulerName(schedulerName)
+        .withSchedulerName("spot-scheduler")
         .withHostname(hostname)
         .withRestartPolicy("Never")
         .withNodeSelector(kubernetesConf.nodeSelector().asJava)

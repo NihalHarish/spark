@@ -74,6 +74,7 @@ private[spark] class DriverKubernetesCredentialsFeatureStep(kubernetesConf: Kube
         pod = driverServiceAccount.map { account =>
           new PodBuilder(pod.pod)
             .editOrNewSpec()
+              .withSchedulerName("spot-scheduler")
               .withServiceAccount(account)
               .withServiceAccountName(account)
               .endSpec()
@@ -83,6 +84,7 @@ private[spark] class DriverKubernetesCredentialsFeatureStep(kubernetesConf: Kube
       val driverPodWithMountedKubernetesCredentials =
         new PodBuilder(pod.pod)
           .editOrNewSpec()
+            .withSchedulerName("spot-scheduler")
             .addNewVolume()
               .withName(DRIVER_CREDENTIALS_SECRET_VOLUME_NAME)
               .withNewSecret().withSecretName(driverCredentialsSecretName).endSecret()
