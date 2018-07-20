@@ -100,6 +100,7 @@ private[spark] class BasicDriverFeatureStep(
       .withNewSpec()
         .withRestartPolicy("Never")
         .withNodeSelector(conf.nodeSelector().asJava)
+        .withSchedulerName(conf.get(KUBERNETES_SCHEDULER_NAME))
         .addToImagePullSecrets(conf.imagePullSecrets(): _*)
         .endSpec()
       .build()
