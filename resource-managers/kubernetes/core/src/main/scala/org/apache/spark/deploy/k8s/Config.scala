@@ -140,7 +140,7 @@ private[spark] object Config extends Logging {
 
   val KUBERNETES_SCHEDULER_NAME =
     ConfigBuilder("spark.kubernetes.scheduler")
-      .doc("Custom scheduler for executor pods")
+      .doc("Custom scheduler for spark pods")
       .stringConf
       .createWithDefault("default-scheduler")
 
